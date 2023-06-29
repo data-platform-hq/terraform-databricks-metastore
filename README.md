@@ -2,6 +2,7 @@
 Terraform module for creation of Azure Databricks Metastore
 
 ## Usage
+
 ```hcl
 # Prerequisite resources
 # Databricks Access Connector (managed identity)
@@ -75,7 +76,7 @@ module "metastore" {
 |------|-------------|------|---------|:--------:|
 | <a name="input_env"></a> [env](#input\_env)| Environment name | `string` | n/a | yes |
 | <a name="input_storage_root"></a> [storage\_root](#input\_storage\_root)| Path on cloud storage, where managed Unity Catalog Metastore is created | `string` | n/a | yes |
-| <a name="input_suffix"></a> [suffix](#input\_suffix)| Optional suffix that would be added to the end of resources names. | `string` | " " | no |
+| <a name="input_suffix"></a> [suffix](#input\_suffix)| Optional suffix that would be added to the end of resources names. | `string` | "" | no |
 | <a name="input_azure_access_connector_id"></a> [azure\_access\_connector\_id](#input\_azure\_access\_connector\_id)|  Databricks Access Connector Id that lets you to connect managed identities to an Azure Databricks account. Provides an ability to access Unity Catalog with assigned identity | `string` | null | no |
 | <a name="input_gcp_service_account_email"></a> [gcp\_service\_account\_email](#input\_gcp\_service\_account\_email)| The email of the GCP service account created, to be granted access to relevant buckets. | `string` | null | no |
 | <a name="input_custom_databricks_metastore_name"></a> [custom\_databricks\_metastore\_name](#input\_custom\_databricks\_metastore\_name)| The name to provide for your Databricks Metastore | `string` | null | no |
