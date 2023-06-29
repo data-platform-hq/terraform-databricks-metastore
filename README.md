@@ -1,5 +1,5 @@
-# Azure Databricks Metastore Terraform module
-Terraform module for creation of Azure Databricks Metastore
+# Databricks Unity Catalog Metastore Terraform module
+Terraform module for creation of Databricks Unity Catalog Metastore
 
 ## Usage
 
