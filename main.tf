@@ -15,6 +15,7 @@ resource "databricks_metastore" "this" {
 resource "databricks_metastore_data_access" "this" {
   metastore_id = databricks_metastore.this.id
   name         = local.databricks_metastore_data_access_name
+  is_default   = var.is_data_access_default
 
   # Azure Access Connector
   dynamic "azure_managed_identity" {
