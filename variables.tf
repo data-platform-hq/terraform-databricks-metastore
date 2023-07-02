@@ -14,6 +14,12 @@ variable "suffix" {
   default     = ""
 }
 
+variable "is_data_access_default" {
+  type        = string
+  description = "Are Data Access Storage Credentials default for assigned Metastore?"
+  default     = true
+}
+
 variable "azure_access_connector_id" {
   type        = string
   description = "Databricks Access Connector Id that lets you to connect managed identities to an Azure Databricks account. Provides an ability to access Unity Catalog with assigned identity"
