@@ -48,8 +48,8 @@ module "metastore" {
   env                                               = "example"
   storage_root                                      = "abfss://${data.azurerm_storage_container.example.name}@${data.azurerm_storage_account.example.name}.dfs.core.windows.net/"
   azure_access_connector_id                         = azurerm_databricks_access_connector.example.id
-  delta_sharing_scope                               = "INTERNAL"
-  delta_sharing_recipient_token_lifetime_in_seconds = 0
+  delta_sharing_scope                               = "INTERNAL_AND_EXTERNAL"
+  delta_sharing_recipient_token_lifetime_in_seconds = 0 # token is infinite
 
   providers = {
     databricks = databricks.workspace
