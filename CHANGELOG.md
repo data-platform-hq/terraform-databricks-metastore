@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/data-platform-hq/terraform-databricks-metastore/compare/v1.0.1...v1.1.0) (2023-07-24)
+
+
+### Features
+
+* delta sharing ([7f75135](https://github.com/data-platform-hq/terraform-databricks-metastore/commit/7f751352b8a86b62ef81436e4914c30b44acf31a))
+
 ## [1.0.1](https://github.com/data-platform-hq/terraform-databricks-metastore/compare/v1.0.0...v1.0.1) (2023-07-02)
 
 
