@@ -5,11 +5,12 @@ locals {
   databricks_metastore_data_access_name = var.custom_databricks_metastore_data_access_name == null ? "data-access-${var.env}" : var.custom_databricks_metastore_data_access_name
 }
 
-
 resource "databricks_metastore" "this" {
-  name          = local.databricks_metastore_name
-  storage_root  = var.storage_root
-  force_destroy = true
+  name                                              = local.databricks_metastore_name
+  storage_root                                      = var.storage_root
+  delta_sharing_scope                               = var.delta_sharing_scope
+  delta_sharing_recipient_token_lifetime_in_seconds = var.delta_sharing_recipient_token_lifetime_in_seconds
+  force_destroy                                     = true
 }
 
 resource "databricks_metastore_data_access" "this" {

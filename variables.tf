@@ -14,6 +14,18 @@ variable "suffix" {
   default     = ""
 }
 
+variable "delta_sharing_scope" {
+  type        = string
+  description = "Used to enable delta sharing on the metastore. Valid values: INTERNAL, INTERNAL_AND_EXTERNAL."
+  default     = "INTERNAL"
+}
+
+variable "delta_sharing_recipient_token_lifetime_in_seconds" {
+  type        = string
+  description = "Used to set expiration duration in seconds on recipient data access tokens. Set to 0 for unlimited duration."
+  default     = 0
+}
+
 variable "is_data_access_default" {
   type        = string
   description = "Are Data Access Storage Credentials default for assigned Metastore?"

@@ -45,9 +45,11 @@ module "metastore" {
   source  = "data-platform-hq/metastore/databricks"
   version = "~> 1.0.0"
 
-  env                       = "example"
-  storage_root              = "abfss://${data.azurerm_storage_container.example.name}@${data.azurerm_storage_account.example.name}.dfs.core.windows.net/"
-  azure_access_connector_id = azurerm_databricks_access_connector.example.id
+  env                                               = "example"
+  storage_root                                      = "abfss://${data.azurerm_storage_container.example.name}@${data.azurerm_storage_account.example.name}.dfs.core.windows.net/"
+  azure_access_connector_id                         = azurerm_databricks_access_connector.example.id
+  delta_sharing_scope                               = "INTERNAL_AND_EXTERNAL"
+  delta_sharing_recipient_token_lifetime_in_seconds = 0 # token is infinite
 
   providers = {
     databricks = databricks.workspace
@@ -77,10 +79,12 @@ module "metastore" {
 | <a name="input_env"></a> [env](#input\_env)| Environment name | `string` | n/a | yes |
 | <a name="input_storage_root"></a> [storage\_root](#input\_storage\_root)| Path on cloud storage, where managed Unity Catalog Metastore is created | `string` | n/a | yes |
 | <a name="input_suffix"></a> [suffix](#input\_suffix)| Optional suffix that would be added to the end of resources names. | `string` | "" | no |
+| <a name="input_delta_sharing_scope"></a> [delta\_sharing\_scope](#input\_delta\_sharing\_scope)| Used to enable delta sharing on the metastore. Valid values: INTERNAL, INTERNAL_AND_EXTERNAL. | `string` | "INTERNAL" | no |
+| <a name="input_delta_sharing_recipient_token_lifetime_in_seconds"></a> [delta\_sharing\_recipient\_token\_lifetime\_in\_seconds](#input\_delta\_sharing\_recipient\_token\_lifetime\_in\_seconds)| Used to set expiration duration in seconds on recipient data access tokens. Set to 0 for unlimited duration. | `string` | 0 | no |
+| <a name="input_is_data_access_default"></a> [is\_data\_access\_default](#input\_is\_data\_access\_default)| Are Data Access Storage Credentials default for assigned Metastore? | `string` | true | no |
 | <a name="input_azure_access_connector_id"></a> [azure\_access\_connector\_id](#input\_azure\_access\_connector\_id)|  Databricks Access Connector Id that lets you to connect managed identities to an Azure Databricks account. Provides an ability to access Unity Catalog with assigned identity | `string` | null | no |
 | <a name="input_gcp_service_account_email"></a> [gcp\_service\_account\_email](#input\_gcp\_service\_account\_email)| The email of the GCP service account created, to be granted access to relevant buckets. | `string` | null | no |
 | <a name="input_custom_databricks_metastore_name"></a> [custom\_databricks\_metastore\_name](#input\_custom\_databricks\_metastore\_name)| The name to provide for your Databricks Metastore | `string` | null | no |
-| <a name="input_custom_databricks_metastore_container_name"></a> [custom\_databricks\_metastore\_container\_name](#input\_custom\_databricks\_metastore\_container\_name)| The name to provide for your Databricks Metastore Container | `string` | null | no |
 | <a name="input_custom_databricks_metastore_data_access_name"></a> [custom\_databricks\_metastore\_data_access\_name](#input\_custom\_databricks\_metastore\_data_access\_name)| The name to provide for your Databricks Metastore Data Access Resource | `string` | null | no |
                                                                                                                                                                                                                                                                                                        
 ## Modules
