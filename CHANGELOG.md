@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/data-platform-hq/terraform-databricks-metastore/compare/v1.1.0...v1.2.0) (2023-08-31)
+
+
+### Features
+
+* account-level api auth support ([5e9fa02](https://github.com/data-platform-hq/terraform-databricks-metastore/commit/5e9fa02a1783bf983309bd972dc91bbbc31a4c21))
+
 # [1.1.0](https://github.com/data-platform-hq/terraform-databricks-metastore/compare/v1.0.1...v1.1.0) (2023-07-24)
 
 
