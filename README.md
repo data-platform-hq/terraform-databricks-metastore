@@ -3,6 +3,66 @@ Terraform module for creation of Databricks Unity Catalog Metastore
 
 ## Usage
 
+This module provides an ability to provision Databricks Unity Catalog Metastore and configure default access credentials. 
+Below you can find examples of Account and Workspace level APIs configuration.
+
+#### Account-level API provider authorization example (recommended).
+```hcl
+# Prerequisite resources
+variable "databricks_account_id" {}
+
+# Databricks Access Connector (managed identity)
+resource "azurerm_databricks_access_connector" "example" {
+  name                = "example-resource"
+  resource_group_name = "example-rg"
+  location            = "eastus"
+
+  identity {
+    type = "SystemAssigned"
+  }
+}
+
+# Storage Account
+data "azurerm_storage_account" "example" {
+  name                = "example-storage-account"
+  resource_group_name = "example-rg"
+}
+
+# Container
+data "azurerm_storage_container" "example" {
+  name                 = "example-container-name"
+  storage_account_name = data.azurerm_storage_account.example.name
+}
+
+# Configure Databricks Provider
+provider "databricks" {
+  alias      = "account"
+  host       = "https://accounts.azuredatabricks.net"
+  account_id = var.databricks_account_id
+}
+
+# Metastore creation
+module "metastore" {
+  source  = "data-platform-hq/metastore/databricks"
+  version = "~> 1.0.0"
+
+  env                                               = "example"
+  region                                            = "eastus" # required if using account-level api
+  storage_root                                      = "abfss://${data.azurerm_storage_container.example.name}@${data.azurerm_storage_account.example.name}.dfs.core.windows.net/"
+  azure_access_connector_id                         = azurerm_databricks_access_connector.example.id
+  delta_sharing_scope                               = "INTERNAL_AND_EXTERNAL"
+  delta_sharing_recipient_token_lifetime_in_seconds = 0 # token is infinite
+
+  providers = {
+    databricks = databricks.account
+  }
+}
+
+```
+<br>
+
+#### Workspace-level API provider authorization.
+
 ```hcl
 # Prerequisite resources
 # Databricks Access Connector (managed identity)
@@ -55,7 +115,6 @@ module "metastore" {
     databricks = databricks.workspace
   }
 }
-
 ```
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
@@ -63,13 +122,13 @@ module "metastore" {
 | Name                                                                         | Version   |
 | ---------------------------------------------------------------------------- | --------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform)    | >= 1.0.0  |
-| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm)          | >= 1.14.2 |
+| <a name="requirement_databricks"></a> [databricks](#requirement\_databricks) | >= 1.24.1 |
 
 ## Providers
 
 | Name                                                                   | Version |
 | ---------------------------------------------------------------------- | ------- |
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm)          | 1.14.2  |
+| <a name="provider_databricks"></a> [databricks](#provider\_databricks) | 1.24.1  |
 
 
 ## Inputs
@@ -86,7 +145,8 @@ module "metastore" {
 | <a name="input_gcp_service_account_email"></a> [gcp\_service\_account\_email](#input\_gcp\_service\_account\_email)| The email of the GCP service account created, to be granted access to relevant buckets. | `string` | null | no |
 | <a name="input_custom_databricks_metastore_name"></a> [custom\_databricks\_metastore\_name](#input\_custom\_databricks\_metastore\_name)| The name to provide for your Databricks Metastore | `string` | null | no |
 | <a name="input_custom_databricks_metastore_data_access_name"></a> [custom\_databricks\_metastore\_data_access\_name](#input\_custom\_databricks\_metastore\_data_access\_name)| The name to provide for your Databricks Metastore Data Access Resource | `string` | null | no |
-                                                                                                                                                                                                                                                                                                       
+| <a name="input_region"></a> [region](#input\_region)| Required when using Account level API provider authorization. The region of metastore | `string` | null | no |
+                                                                                                                                                                                                                                                                                              
 ## Modules
 
 No modules.

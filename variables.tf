@@ -55,3 +55,9 @@ variable "custom_databricks_metastore_data_access_name" {
   description = "The name to provide for your Databricks Metastore Data Access Resource"
   default     = null
 }
+
+variable "region" {
+  type        = string
+  description = "Required when using Account level API provider authorization. The region of metastore"
+  default     = null
+}
