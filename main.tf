@@ -11,6 +11,7 @@ resource "databricks_metastore" "this" {
   delta_sharing_scope                               = var.delta_sharing_scope
   delta_sharing_recipient_token_lifetime_in_seconds = var.delta_sharing_recipient_token_lifetime_in_seconds
   force_destroy                                     = true
+  region                                            = var.region
 }
 
 resource "databricks_metastore_data_access" "this" {
