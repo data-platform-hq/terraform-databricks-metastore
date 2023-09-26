@@ -15,13 +15,15 @@ resource "databricks_metastore" "this" {
 }
 
 resource "databricks_metastore_data_access" "this" {
+  count = length(var.credentials_type) != 0 ? 1 : 0
+
   metastore_id = databricks_metastore.this.id
   name         = local.databricks_metastore_data_access_name
   is_default   = var.is_data_access_default
 
   # Azure Access Connector
   dynamic "azure_managed_identity" {
-    for_each = var.azure_access_connector_id != null ? [1] : []
+    for_each = var.credentials_type == "azure" ? [1] : []
     content {
       access_connector_id = var.azure_access_connector_id
     }
@@ -29,9 +31,17 @@ resource "databricks_metastore_data_access" "this" {
 
   # GCP Service Account
   dynamic "databricks_gcp_service_account" {
-    for_each = var.gcp_service_account_email != null ? [1] : []
+    for_each = var.credentials_type == "gcp" ? [1] : []
     content {
       email = var.gcp_service_account_email
+    }
+  }
+
+  # AWS Role
+  dynamic "aws_iam_role" {
+    for_each = var.credentials_type == "aws" ? [1] : []
+    content {
+      role_arn = var.aws_iam_role_arn
     }
   }
 }
