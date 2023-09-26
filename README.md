@@ -146,6 +146,8 @@ module "metastore" {
 | <a name="input_custom_databricks_metastore_name"></a> [custom\_databricks\_metastore\_name](#input\_custom\_databricks\_metastore\_name)| The name to provide for your Databricks Metastore | `string` | null | no |
 | <a name="input_custom_databricks_metastore_data_access_name"></a> [custom\_databricks\_metastore\_data_access\_name](#input\_custom\_databricks\_metastore\_data_access\_name)| The name to provide for your Databricks Metastore Data Access Resource | `string` | null | no |
 | <a name="input_region"></a> [region](#input\_region)| Required when using Account level API provider authorization. The region of metastore | `string` | null | no |
+| <a name="input_credentials_type"></a> [credentials\_type](#input\_credentials\_type)| Cloud provider | `string` | null | no |
+| <a name="input_aws_iam_role_arn"></a> [aws\_iam\_role\_arn](#input\_aws\_iam\_role\_arn)| The Amazon Resource Name, of the AWS IAM role for S3 data access | `string` | null | no |
                                                                                                                                                                                                                                                                                               
 ## Modules
 

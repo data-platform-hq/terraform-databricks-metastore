@@ -61,3 +61,20 @@ variable "region" {
   description = "Required when using Account level API provider authorization. The region of metastore"
   default     = null
 }
+
+variable "credentials_type" {
+  type        = string
+  description = "Cloud provider"
+  default     = null
+
+  validation {
+    condition     = contains(["azure", "gcp", "aws"], var.credentials_type)
+    error_message = "Please provide correct provider, use : azure, gcp, aws."
+  }
+}
+
+variable "aws_iam_role_arn" {
+  type        = string
+  description = "The Amazon Resource Name, of the AWS IAM role for S3 data access"
+  default     = null
+}
