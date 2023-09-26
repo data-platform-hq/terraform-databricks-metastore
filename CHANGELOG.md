@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/data-platform-hq/terraform-databricks-metastore/compare/v1.2.0...v1.3.0) (2023-09-26)
+
+
+### Features
+
+* cloud agnostic support ([256b4e0](https://github.com/data-platform-hq/terraform-databricks-metastore/commit/256b4e0ce2683fa82b84a33fd2197106741f4102))
+
 # [1.2.0](https://github.com/data-platform-hq/terraform-databricks-metastore/compare/v1.1.0...v1.2.0) (2023-08-31)
 
 
