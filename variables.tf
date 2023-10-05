@@ -25,9 +25,9 @@ variable "metastore_data_access_name" {
 }
 
 variable "metastore_data_access_force_destroy" {
-  type = bool
+  type        = bool
   description = "DAC force destroy option"
-  default = true
+  default     = true
 }
 
 variable "delta_sharing_scope" {

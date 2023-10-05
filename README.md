@@ -46,10 +46,11 @@ module "metastore" {
   source  = "data-platform-hq/metastore/databricks"
   version = "~> 1.0.0"
 
-  env                                               = "example"
+  metastore_name                                    = "primary-metastore"
   region                                            = "eastus" # required if using account-level api
   storage_root                                      = "abfss://${data.azurerm_storage_container.example.name}@${data.azurerm_storage_account.example.name}.dfs.core.windows.net/"
   azure_access_connector_id                         = azurerm_databricks_access_connector.example.id
+  credentials_type                                  = "azure"
   delta_sharing_scope                               = "INTERNAL_AND_EXTERNAL"
   delta_sharing_recipient_token_lifetime_in_seconds = 0 # token is infinite
 
@@ -105,9 +106,10 @@ module "metastore" {
   source  = "data-platform-hq/metastore/databricks"
   version = "~> 1.0.0"
 
-  env                                               = "example"
+  metastore_name                                    = "primary-metastore"
   storage_root                                      = "abfss://${data.azurerm_storage_container.example.name}@${data.azurerm_storage_account.example.name}.dfs.core.windows.net/"
   azure_access_connector_id                         = azurerm_databricks_access_connector.example.id
+  credentials_type                                  = "azure"
   delta_sharing_scope                               = "INTERNAL_AND_EXTERNAL"
   delta_sharing_recipient_token_lifetime_in_seconds = 0 # token is infinite
 

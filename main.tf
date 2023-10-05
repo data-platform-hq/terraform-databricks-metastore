@@ -8,9 +8,9 @@ resource "databricks_metastore" "this" {
 }
 
 resource "databricks_metastore_data_access" "this" {
-  metastore_id = databricks_metastore.this.id
-  name         = coalesce(var.metastore_data_access_name, "data-access-${var.metastore_name}")
-  is_default   = var.is_data_access_default
+  metastore_id  = databricks_metastore.this.id
+  name          = coalesce(var.metastore_data_access_name, "data-access-${var.metastore_name}")
+  is_default    = var.is_data_access_default
   force_destroy = var.metastore_data_access_force_destroy
 
   # Azure Access Connector
