@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/data-platform-hq/terraform-databricks-metastore/compare/v1.3.0...v1.4.0) (2023-10-05)
+
+
+### Features
+
+* gcp data access fix; update naming convention ([b620ff6](https://github.com/data-platform-hq/terraform-databricks-metastore/commit/b620ff65367e0e76897e87a00893b599a5ff70a3))
+
 # [1.3.0](https://github.com/data-platform-hq/terraform-databricks-metastore/compare/v1.2.0...v1.3.0) (2023-09-26)
 
 
